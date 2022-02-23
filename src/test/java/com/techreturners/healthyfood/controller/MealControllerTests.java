@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @AutoConfigureMockMvc
 @SpringBootTest
-public class MealManagerControllerTests {
+public class MealControllerTests {
 
     @Mock
     private HealthyFoodServiceImpl mockHealthyFoodServiceImpl;

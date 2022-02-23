@@ -26,7 +26,7 @@ public class Meal {
     MealType mealType;
 
     @Column
-    String title;
+    String dish;
 
     @Column
     String  ingredients;
@@ -47,5 +47,5 @@ public class Meal {
     Boolean isDairyFree;
 
     @Column
-    Boolean isNutFree;
+    Boolean isPaleo;
 }
