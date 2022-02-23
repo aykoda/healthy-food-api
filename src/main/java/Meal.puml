@@ -7,7 +7,7 @@ left to right direction
 class Meal {
 +mealType:MealType
 +dishName: String
-+ingredients: String
++ingredients: ArrayList[]
 +calories: Integer
 +isVegan: boolean
 +isVegetarian: boolean
