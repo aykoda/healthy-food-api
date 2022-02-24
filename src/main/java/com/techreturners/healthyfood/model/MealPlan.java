@@ -1,5 +1,5 @@
-//package com.techreturners.healthyfood.model;
-//
+package com.techreturners.healthyfood.model;
+
 //import lombok.AllArgsConstructor;
 //import lombok.Builder;
 //import lombok.Data;
@@ -18,7 +18,7 @@
 //// This meal plan should not be in the database,
 //// it exists to allow the healthy food controller to return a meal plan
 //// TODO
-//public class MealPlan {
+public class MealPlan {
 //
 //    @Id
 //    @GeneratedValue
@@ -33,4 +33,4 @@
 //
 //    @Column
 //    Meal dinner;
-//}
+}

@@ -6,9 +6,5 @@ import java.util.List;
 
 public interface HealthyFoodService {
 
-    List<Meal> getAllMeals();
-    Meal insertMeal(Meal meal);
-    Meal getMealById(Long id);
-
-    void deleteMealById(Long id);
+    List<Meal> getDailyMeals();
 }

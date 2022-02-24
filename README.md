@@ -1,4 +1,6 @@
-# 🥗🍽️🥂 Healthy Food API
+# Healthy Food API
+This is a daily meal planning API that makes use of the [Spoonacular API](https://spoonacular.com/food-api) 
+to get a meal plan for a single day based on calories and dietary requirements.
 
 # Solution
 

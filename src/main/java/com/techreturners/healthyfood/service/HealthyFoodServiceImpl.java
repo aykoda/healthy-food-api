@@ -15,25 +15,12 @@ public class HealthyFoodServiceImpl implements HealthyFoodService {
     HealthyFoodRepository healthyFoodRepository;
 
     @Override
-    public List<Meal> getAllMeals() {
+    public List<Meal> getDailyMeals() {
         List<Meal> meals = new ArrayList<>();
-        healthyFoodRepository.findAll().forEach(meals::add);
+       // healthyFoodRepository.findAll().forEach(meals::add);
+        meals.add(new Meal(1L,"fake title",30,6,"www.google.com"));
+        meals.add(new Meal(2L,"fake title 2",40,2,"www.google.com/alalalalla"));
         return meals;
-    }
-
-    @Override
-    public Meal insertMeal(Meal meal) {
-        return healthyFoodRepository.save(meal);
-    }
-
-    @Override
-    public Meal getMealById(Long id) {
-        return healthyFoodRepository.findById(id).get();
-    }
-
-    @Override
-    public void deleteMealById(Long id){
-        healthyFoodRepository.deleteById(id);
     }
 
 }

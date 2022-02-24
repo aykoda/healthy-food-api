@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Builder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -16,36 +13,36 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Builder
 public class Meal {
-
+/*
+*  "id": 885005,
+            "imageType": "jpg",
+            "title": "No-Bake Lemon Tarts (Gluten Free, Paleo + Vegan)",
+            "readyInMinutes": 20,
+            "servings": 3,
+            "sourceUrl": "http://www.bakerita.com/no-bake-lemon-tarts-gluten-free-paleo-vegan/"*/
     @Id
     @GeneratedValue
     @Column(updatable = false, nullable = false)
     Long id;
 
-    @Column
-    MealType mealType;
+   // @Column
+  //  MealType mealType;
 
     @Column
-    String dish;
+    String title;
 
-    @Column
-    String  ingredients;
+   // @Column
+   // String  ingredients;
 
-    @Column
-    Integer calories;
+   // @Column
+    // int calories;
 
-    @Column
-    Boolean isVegan;
+   // @Enumerated
+   // Diet diet;
 
-    @Column
-    Boolean isVegetarian;
+    int readyInMinutes;
 
-    @Column
-    Boolean isGlutenFree;
+    int servings;
 
-    @Column
-    Boolean isDairyFree;
-
-    @Column
-    Boolean isPaleo;
+    String sourceUrl;
 }
