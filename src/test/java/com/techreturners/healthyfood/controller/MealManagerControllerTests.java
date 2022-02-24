@@ -1,8 +1,8 @@
 package com.techreturners.healthyfood.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.techreturners.healthyfood.model.Diet;
 import com.techreturners.healthyfood.model.Meal;
+import com.techreturners.healthyfood.model.Diet;
 import com.techreturners.healthyfood.service.HealthyFoodServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,17 +16,15 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
-import static org.mockito.Mockito.verify;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @AutoConfigureMockMvc
 @SpringBootTest
-public class MealManagerControllerTests {
+ class MealManagerControllerTests {
 
     @Mock
     private HealthyFoodServiceImpl mockHealthyFoodServiceImpl;
@@ -40,15 +38,21 @@ public class MealManagerControllerTests {
     private ObjectMapper mapper;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         mockMvcController = MockMvcBuilders.standaloneSetup(healthyFoodController).build();
         mapper = new ObjectMapper();
     }
 
     @Test
-    public void getAResponse()throws Exception {
+     void getAResponse() throws Exception {
+        List<Meal> meals = new ArrayList<>();
 
-       verify(healthyFoodController.getDailyMealsSpecificDiet(Diet.GLUTENFREE,2000L).hasBody());
-       // verify(healthyFoodController.getDailyMealsSpecificDiet().hasBody());
+        when(mockHealthyFoodServiceImpl.getDailyMeals()).thenReturn(meals);
+
+        this.mockMvcController.perform(
+                        MockMvcRequestBuilders.get("/api/v1/mealPlanner/"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
-}
+
+    }
+
