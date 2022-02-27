@@ -13,13 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 public class Meal {
-/*
-*  "id": 885005,
-            "imageType": "jpg",
-            "title": "No-Bake Lemon Tarts (Gluten Free, Paleo + Vegan)",
-            "readyInMinutes": 20,
-            "servings": 3,
-            "sourceUrl": "http://www.bakerita.com/no-bake-lemon-tarts-gluten-free-paleo-vegan/"*/
+
     @Id
     @GeneratedValue
     @Column(updatable = false, nullable = false)
