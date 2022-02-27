@@ -14,7 +14,7 @@ public class MealManagerServiceTests {
     private HealthyFoodRepository mockHealthyFoodRepository;
 
     @InjectMocks
-    private HealthyFoodServiceImpl bookManagerServiceImpl;
+    private HealthyFoodServiceImpl healthyFoodServiceImpl;
 
 
 
