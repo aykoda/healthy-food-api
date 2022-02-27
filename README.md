@@ -1,4 +1,5 @@
-# Healthy Food API
+# 🥗 Healthy Food API
+
 This is a daily meal planning API that makes use of the [Spoonacular API](https://spoonacular.com/food-api) 
 to get a meal plan for a single day based on calories and dietary requirements.
 
@@ -17,7 +18,22 @@ package. Run the application.
 
 In a browser, go to `localhost:8080/api/v1/mealplanner` and you can see the API:
 
+# Solution
 
+# Diagram
+
+Enum class Diet - 
+
+
+Generated Spring Boot project called `Healthy Food API`
+
+Used Spring  `Initializr`, metadata included: maven, Java 17
+
+Dependencies used:
+- Spring Web - web endpoint for clients - (rather than Spring reactive web)
+- Validation - to simplify validation of parameters
+- Java Actuator - Actuator is mainly used to expose operational information about the running application — health, metrics, info, dump, env, etc
+- Test - easier to write tests
 
 
 
