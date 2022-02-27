@@ -23,7 +23,7 @@ public class HealthyFoodController {
     @GetMapping
     public ResponseEntity getDailyMealsSpecificDiet(@RequestParam(required = false) Diet diet, Long calories) {
         List<Meal> meals = null;
-        if(diet!=null)
+       // if(diet!=null)
           meals= healthyDailyMealService.getDailyMeals();
 
         return new ResponseEntity<>(meals, HttpStatus.OK);
