@@ -3,6 +3,7 @@ package com.techreturners.healthyfood.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techreturners.healthyfood.model.Meal;
 import com.techreturners.healthyfood.model.Diet;
+import com.techreturners.healthyfood.model.MealPlan;
 import com.techreturners.healthyfood.service.HealthyFoodServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,9 +46,10 @@ import static org.mockito.Mockito.when;
 
     @Test
      void getAResponse() throws Exception {
+        MealPlan mealPlan =null;
         List<Meal> meals = new ArrayList<>();
 
-        when(mockHealthyFoodServiceImpl.getDailyMeals()).thenReturn(meals);
+        when(mockHealthyFoodServiceImpl.getDailyMeals(mealPlan)).thenReturn(meals);
 
         this.mockMvcController.perform(
                         MockMvcRequestBuilders.get("/api/v1/mealPlanner/"))
