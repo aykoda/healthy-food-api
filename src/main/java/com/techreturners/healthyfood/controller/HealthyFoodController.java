@@ -30,7 +30,19 @@ public class HealthyFoodController {
     @RequestMapping(value = {"/diet={diet}", "/{calories}", "/diet={diet}/{calories}"})
     public ResponseEntity getDailyMealsSpecificDiet(@PathVariable(required = false) Diet diet, @PathVariable(required = false) Long calories) {
         MealPlan inputMealPlan = new MealPlan();
-            inputMealPlan.setDiet(diet);
+        inputMealPlan.setDiet(diet);
+        inputMealPlan.setTargetCalories(calories);
+        List<Meal> meals = null;
+        meals = healthyDailyMealService.getDailyMeals(inputMealPlan);
+
+        return new ResponseEntity<>(meals, HttpStatus.OK);
+    }
+
+    @GetMapping
+    @RequestMapping(value = {"/exclude={ingredients}", "/exclude={ingredients}/{calories}"})
+    public ResponseEntity getDailyMealsCaloriesExclusions(@PathVariable(required = false) List<String> ingredients, @PathVariable(required = false) Long calories) {
+        MealPlan inputMealPlan = new MealPlan();
+        inputMealPlan.setExclusions(ingredients);
         inputMealPlan.setTargetCalories(calories);
         List<Meal> meals = null;
         meals = healthyDailyMealService.getDailyMeals(inputMealPlan);

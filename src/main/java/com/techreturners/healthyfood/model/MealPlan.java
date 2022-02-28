@@ -5,33 +5,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//import lombok.AllArgsConstructor;
-//import lombok.Builder;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
-//
-//import javax.persistence.Column;
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.Id;
-//
-//@Entity
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Builder
-//// This meal plan should not be in the database,
-//// it exists to allow the healthy food controller to return a meal plan
-//// TODO
+import java.util.List;
+
+
+// This meal plan should not be in the database,
+// it exists to allow the healthy food controller to return a meal plan
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class MealPlan {
 
-private Diet diet;
-private Long targetCalories;
-private String[] exclusions;
+    private Diet diet;
+    private Long targetCalories;
+    private List<String> exclusions;
 
     public Diet getDiet() {
         return diet;
@@ -49,18 +36,15 @@ private String[] exclusions;
         this.targetCalories = targetCalories;
     }
 
-    public String[] getExclusions() {
+    public List<String> getExclusions() {
         return exclusions;
     }
 
-    public void setExclusions(String[] exclusions) {
+    public void setExclusions(List exclusions) {
         this.exclusions = exclusions;
     }
 
 
-// "diet=vegetarian"+
-//                        "&targetCalories=2000+"+
-//                        "&exclude=shellfish,olives,sugar,cheese,butter"+
 //    @Id
 //    @GeneratedValue
 //    @Column(updatable = false, nullable = false)

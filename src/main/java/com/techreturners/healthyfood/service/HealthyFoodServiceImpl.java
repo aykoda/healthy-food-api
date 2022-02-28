@@ -49,21 +49,21 @@ public class HealthyFoodServiceImpl implements HealthyFoodService {
             stringBuilder.append("&diet=").append(meal.getDiet());
         if (meal.getTargetCalories() != null)
             stringBuilder.append("&targetCalories=").append(meal.getTargetCalories());
-        /*@TODO MANAGE ARRAY OF EXCLUSIONS*/
-        if (meal.getExclusions() != null && meal.getExclusions().length > 0) {
-            stringBuilder.append("&exclude=").append(meal.getExclusions()[0]);
-            for (int i = 1; i < meal.getExclusions().length - 1; i++) {
-                stringBuilder.append("").append(meal.getExclusions()[i]);
+        if (meal.getExclusions() != null && meal.getExclusions().size() > 0) {
+            stringBuilder.append("&exclude=").append(meal.getExclusions().get(0));
+            for (int i = 1; i < meal.getExclusions().size() - 1; i++) {
+                stringBuilder.append(",").append(meal.getExclusions().get(i));
             }
         }
         stringBuilder.append("&apiKey=").append(apiKey);
 
         url = stringBuilder.toString();
-        System.out.println(url);
+        /*uncomment to see the url that queries spoonacular, it could be used in postman (results may differ cause different recipes are returned every time)*/
+        // System.out.println(url);
 
         ResponseEntity<Object> response = restTemplate.exchange(url, HttpMethod.GET, entity, Object.class);
         LinkedHashMap mealsMap = (LinkedHashMap) response.getBody();
-        List<Meal> meals = new ArrayList<Meal>(mealsMap.values());
+        List<Meal> meals = new ArrayList<>(mealsMap.values());
 
         return meals;
     }

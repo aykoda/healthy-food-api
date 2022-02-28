@@ -16,13 +16,22 @@ tells the Spring framework that this specific class is the main entry point.
 The annotation is in the `HealthyFoodApplication` main class in the `healthyfood` 
 package. Run the application.
 
-In a browser, go to `localhost:8080/api/v1/mealplanner` and you can see the API:
+In a browser, go to `localhost:8080/api/v1/mealplanner` and you can see the API
+FILTERING BY DIET AND/OR CALORIES: 
+filters a specific diet and eventually max calories, if specified 
+i.e. http://localhost:8080/api/v1/mealPlanner/diet=PALEO/2000
+DIETS ALLOWED : ANY DIET FROM Enum class Diet
+
+
+IT IS POSSIBLE TO SPECIFY ANY FOOD TO EXCLUDE, just separate them with a , if they're more than a single ingredients,
+OPTIONALLY IT IS POSSIBLE TO SPECIFY A MAX NUMBER OF CALORIES TOO
+i.e. http://localhost:8080/api/v1/mealPlanner/exclude=sugar,fruit,chicken,eggs,cheese/1100
 
 # Solution
 
 # Diagram
 
-Enum class Diet - 
+Enum class Diet - GLUTENFREE KETOGENIC VEGETARIAN LACTOVEGETARIAN OVOVEGETARIAN VEGAN PESCETARIAN PALEO PRIMAL LOWFODMAP WHOLE30
 
 
 Generated Spring Boot project called `Healthy Food API`
