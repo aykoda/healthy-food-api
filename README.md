@@ -8,7 +8,11 @@ to get a meal plan for a single day based on calories and dietary requirements.
 
 ## Approach
 
-### Diagram TO FINISH
+### Diagram 
+
+Developed a diagram as a starting point to define processes.
+
+![](docs/HealthyFoodAPIdiagram.png)
 
 Generated Spring Boot project called `Healthy Food API`
 
@@ -22,33 +26,43 @@ Dependencies used:
   http://localhost:8080/actuator/info
 - Test - easier to write tests
 
-
-Enum class Diet - GLUTENFREE KETOGENIC VEGETARIAN LACTOVEGETARIAN OVOVEGETARIAN VEGAN PESCETARIAN
+The following classes were created:
+`Enum class Diet` - GLUTENFREE KETOGENIC VEGETARIAN LACTOVEGETARIAN OVOVEGETARIAN VEGAN PESCETARIAN
 PALEO PRIMAL LOWFODMAP WHOLE30
+`MealPlan Class` - 
+`HealthyFoodService Implementation class` - 
+`HealthyFood Service class` -
+`Meal Class` - 
 
-## project structure
+### Project Structure
 
-The API structure has a `src`, a `test` and `main` directories with the java files we need. 
+The API structure has a `src`, a `test` and `main`. 
 This application is a Spring Boot application, that is part of the Spring Boot ecosystem. 
 It is a framework we can use to quickly start to build a web application using Java.
+
+### How to use it:
 
 To run this API you need to watch out for the `@SpringBootApplication` annotation which 
 tells the Spring framework that this specific class is the main entry point. 
 The annotation is in the `HealthyFoodApplication` main class in the `healthyfood` 
 package. Run the application.
 
-In a browser, go to `localhost:8080/api/v1/mealplanner` and you can see the API
-FILTERING BY DIET AND/OR CALORIES: 
-filters a specific diet and eventually max calories, if specified 
+In a browser, go to `localhost:8080/api/v1/mealplanner` and you can see the API 
+filtering by diet and/or by calories:
+- filters a specific diet and eventually max calories, if specified 
 i.e. http://localhost:8080/api/v1/mealPlanner/diet=PALEO/2000
-DIETS ALLOWED : ANY DIET FROM Enum class Diet
 
+- DIETS ALLOWED : ANY DIET FROM Enum class Diet
 
-IT IS POSSIBLE TO SPECIFY ANY FOOD TO EXCLUDE, just separate them with a , if they're more than a single ingredients,
-OPTIONALLY IT IS POSSIBLE TO SPECIFY A MAX NUMBER OF CALORIES TOO
+- It is possible to specify any food to `exclude`, just separate them with a `,` if they have more 
+than a single ingredient. Optionally it is possible to specify a max number of calories too.
 i.e. http://localhost:8080/api/v1/mealPlanner/exclude=sugar,fruit,chicken,eggs,cheese/1100
 
-# Diagram TO FINISH
+### Extensions
+
+Deploy your API onto a cloud service, such as AWS.
+
+
 
 
 
