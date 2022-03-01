@@ -5,26 +5,38 @@ skinparam classAttributeIconSize 0
 left to right direction
 
 class Meal {
-+mealType:MealType
-+dishName: String
-+ingredients: ArrayList[]
-+calories: Integer
-+isVegan: boolean
-+isVegetarian: boolean
-+isGlutenFree: boolean
-+isDairyFree: boolean
-+isPaleo: boolean
-
++id: Long
++title: String
++readyInMinutes: Integer
++servings: Integer
++sourceUrl: String
 }
 
 class MealPlan{
+-diet: Diet
+-targetCalories: Long
+-exclusions: List<String>
+
++getDiet():
++setDiet(Diet diet): void
++getTargetCalories():
++setTargetCalories(Long targetCalories):
++getExclusions():
++setExclusions(List exclusions):
 
 }
-
-enum MealType {
-BREAKFAST
-LUNCH
-DINNER
+enum Diet {
+ GLUTENFREE,
+ KETOGENIC,
+ VEGETARIAN,
+ LACTOVEGETARIAN,
+ OVOVEGETARIAN,
+ VEGAN,
+ PESCETARIAN,
+ PALEO,
+ PRIMAL,
+ LOWFODMAP,
+ WHOLE30
 }
 
 @enduml

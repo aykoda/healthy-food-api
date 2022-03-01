@@ -1,11 +1,32 @@
 # 🥗 Healthy Food API
 
+# Introduction
+
 This is a daily meal planning API that makes use of the [Spoonacular API](https://spoonacular.com/food-api) 
 to get a meal plan for a single day based on calories and dietary requirements.
 
-# Solution
 
-# Introduction
+## Approach
+
+### Diagram TO FINISH
+
+Generated Spring Boot project called `Healthy Food API`
+
+Used Spring  `Initializr`, metadata included: maven, Java 17
+
+Dependencies used:
+- Spring Web - web endpoint for clients - (rather than Spring reactive web)
+- Validation - to simplify validation of parameters
+- Java Actuator - Actuator is mainly used to expose operational information about the running application — health, metrics, info, dump, env, etc
+  http://localhost:8080/actuator/health
+  http://localhost:8080/actuator/info
+- Test - easier to write tests
+
+
+Enum class Diet - GLUTENFREE KETOGENIC VEGETARIAN LACTOVEGETARIAN OVOVEGETARIAN VEGAN PESCETARIAN
+PALEO PRIMAL LOWFODMAP WHOLE30
+
+## project structure
 
 The API structure has a `src`, a `test` and `main` directories with the java files we need. 
 This application is a Spring Boot application, that is part of the Spring Boot ecosystem. 
@@ -27,24 +48,9 @@ IT IS POSSIBLE TO SPECIFY ANY FOOD TO EXCLUDE, just separate them with a , if th
 OPTIONALLY IT IS POSSIBLE TO SPECIFY A MAX NUMBER OF CALORIES TOO
 i.e. http://localhost:8080/api/v1/mealPlanner/exclude=sugar,fruit,chicken,eggs,cheese/1100
 
-# Solution
-
-# Diagram
-
-Enum class Diet - GLUTENFREE KETOGENIC VEGETARIAN LACTOVEGETARIAN OVOVEGETARIAN VEGAN PESCETARIAN PALEO PRIMAL LOWFODMAP WHOLE30
+# Diagram TO FINISH
 
 
-Generated Spring Boot project called `Healthy Food API`
-
-Used Spring  `Initializr`, metadata included: maven, Java 17
-
-Dependencies used:
-- Spring Web - web endpoint for clients - (rather than Spring reactive web)
-- Validation - to simplify validation of parameters
-- Java Actuator - Actuator is mainly used to expose operational information about the running application — health, metrics, info, dump, env, etc
-  http://localhost:8080/actuator/health
-  http://localhost:8080/actuator/info
-- Test - easier to write tests
 
 
 

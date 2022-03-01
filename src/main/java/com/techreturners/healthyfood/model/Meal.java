@@ -19,20 +19,9 @@ public class Meal {
     @Column(updatable = false, nullable = false)
     Long id;
 
-   // @Column
-  //  MealType mealType;
-
     @Column
     String title;
 
-   // @Column
-   // String  ingredients;
-
-   // @Column
-    // int calories;
-
-   // @Enumerated
-   // Diet diet;
 
     int readyInMinutes;
 
