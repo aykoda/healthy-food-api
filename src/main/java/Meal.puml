@@ -4,6 +4,9 @@ skinparam classAttributeIconSize 0
 
 left to right direction
 
+MealPlan --> Diet
+HealthyFoodServiceImpl *-- HealthyFoodService
+
 class Meal {
 +id: Long
 +title: String
@@ -17,14 +20,27 @@ class MealPlan{
 -targetCalories: Long
 -exclusions: List<String>
 
-+getDiet():
-+setDiet(Diet diet): void
-+getTargetCalories():
-+setTargetCalories(Long targetCalories):
-+getExclusions():
-+setExclusions(List exclusions):
++getDiet(): Diet
++setDiet(diet: Diet): void
++getTargetCalories(): Long
++setTargetCalories(targetCalories: Long): void
++getExclusions(): List<String>
++setExclusions(exclusions: List<String>): void
 
 }
+
+Interface HealthyFoodService {
++getDailyMeals(): List<Meal>
++getDailyMeals(meal: MealPlan): List<Meal>
+}
+
+class HealthyFoodServiceImpl {
++apiKey: String
++restTemplate: RestTemplate
+
+
+}
+
 enum Diet {
  GLUTENFREE,
  KETOGENIC,
