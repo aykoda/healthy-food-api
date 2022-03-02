@@ -39,4 +39,6 @@ public class Meal {
     int servings;
 
     String sourceUrl;
+
+
 }

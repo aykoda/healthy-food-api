@@ -20,6 +20,7 @@ public class MealPlan {
     private Long targetCalories;
     private List<String> exclusions;
 
+
     public Diet getDiet() {
         return diet;
     }
