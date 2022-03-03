@@ -43,6 +43,7 @@ import static org.mockito.Mockito.when;
     private MockMvc mockMvcController;
 
     private ObjectMapper mapper;
+    private static String baseUrl = "/api/v1/mealPlanner";
 
     @BeforeEach
     public void setup() {
@@ -50,11 +51,24 @@ import static org.mockito.Mockito.when;
         mapper = new ObjectMapper();
     }
 
+    /*"","/","/diet={diet}", "/{calories}","/exclude={ingredients}",
+            "/diet={diet}/{calories}", "/{calories}/exclude={ingredients}", "/diet={diet}/exclude={ingredients}",
+            "/diet={diet}/{calories}/exclude={ingredients}"
+    *
+    * */
+
    private static Stream<Arguments> parametersGenerator() {
       return Stream.of(
-              Arguments.of("/api/v1/mealPlanner/",MockMvcResultMatchers.status().isOk()),
-              Arguments.of("/api/v1/mealPlanner/2000",MockMvcResultMatchers.status().isOk()),
-              Arguments.of("/api/v1/mealPlanner/badReq",MockMvcResultMatchers.status().isOk())
+              Arguments.of(baseUrl,MockMvcResultMatchers.status().isOk()),
+              Arguments.of(baseUrl + "BadURL",MockMvcResultMatchers.status().isNotFound()),
+              Arguments.of(baseUrl + "/2000",MockMvcResultMatchers.status().isOk()),
+              Arguments.of(baseUrl + "/exclude=egg",MockMvcResultMatchers.status().isOk()),
+              Arguments.of(baseUrl + "/2000/exclude=egg",MockMvcResultMatchers.status().isOk()),
+              Arguments.of(baseUrl + String.format("/%s",Diet.KETOGENIC), MockMvcResultMatchers.status().isBadRequest()),
+              Arguments.of(baseUrl + String.format("/diet=%s",Diet.KETOGENIC), MockMvcResultMatchers.status().isOk()),
+              Arguments.of(baseUrl + String.format("/diet=%s/2000",Diet.KETOGENIC), MockMvcResultMatchers.status().isOk()),
+              Arguments.of(baseUrl + String.format("/diet=%s/exclude=egg",Diet.KETOGENIC), MockMvcResultMatchers.status().isOk()),
+              Arguments.of(baseUrl + String.format("/diet=%s/2000/exclude=egg",Diet.KETOGENIC), MockMvcResultMatchers.status().isOk())
       );
    }
 
@@ -63,6 +77,7 @@ import static org.mockito.Mockito.when;
      void getAResponse(String url, ResultMatcher result) throws Exception {
         MealPlan mealPlan =null;
         List<Meal> meals = new ArrayList<>();
+
 
         when(mockHealthyFoodServiceImpl.getDailyMeals(mealPlan)).thenReturn(meals);
 
