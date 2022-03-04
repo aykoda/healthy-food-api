@@ -2,8 +2,6 @@ package com.techreturners.healthyfood.service;
 
 import com.techreturners.healthyfood.model.Meal;
 import com.techreturners.healthyfood.model.MealPlan;
-import com.techreturners.healthyfood.repository.HealthyFoodRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -21,8 +19,6 @@ public class HealthyFoodServiceImpl implements HealthyFoodService {
     @Value("${api_key}")
     private String apiKey;
 
-    @Autowired
-    HealthyFoodRepository healthyFoodRepository;
     RestTemplate restTemplate = new RestTemplate();
 
     @Override

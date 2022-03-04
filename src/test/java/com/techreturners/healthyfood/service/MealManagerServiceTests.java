@@ -1,21 +1,16 @@
 package com.techreturners.healthyfood.service;
 
-import com.techreturners.healthyfood.repository.HealthyFoodRepository;
+import org.junit.jupiter.api.Disabled;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DataJpaTest
+@Disabled
 public class MealManagerServiceTests {
 
-    @Mock
-    private HealthyFoodRepository mockHealthyFoodRepository;
-
-    @InjectMocks
-    private HealthyFoodServiceImpl healthyFoodServiceImpl;
-
+    // @InjectMocks
+    //private HealthyFoodServiceImpl healthyFoodServiceImpl;
 
 
 }
