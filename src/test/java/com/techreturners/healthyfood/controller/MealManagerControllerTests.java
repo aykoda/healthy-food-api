@@ -1,34 +1,33 @@
 package com.techreturners.healthyfood.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.techreturners.healthyfood.model.Meal;
 import com.techreturners.healthyfood.model.Diet;
-import com.techreturners.healthyfood.model.MealPlan;
-import com.techreturners.healthyfood.service.HealthyFoodServiceImpl;
+import com.techreturners.healthyfood.service.HealthyFoodService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import java.util.stream.Stream;
+import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMockMvc
 @SpringBootTest
  class MealManagerControllerTests {
 
-    @Mock
-    private HealthyFoodServiceImpl mockHealthyFoodServiceImpl;
+    @Autowired
+    private HealthyFoodService healthyFoodService;
 
     @InjectMocks
     private HealthyFoodController healthyFoodController;
@@ -37,23 +36,47 @@ import static org.mockito.Mockito.when;
     private MockMvc mockMvcController;
 
     private ObjectMapper mapper;
+    private static String baseUrl = "/api/v1/mealPlanner";
 
     @BeforeEach
     public void setup() {
-        mockMvcController = MockMvcBuilders.standaloneSetup(healthyFoodController).build();
+       // mockMvcController = MockMvcBuilders.standaloneSetup(healthyFoodController).build();
         mapper = new ObjectMapper();
     }
 
-    @Test
-     void getAResponse() throws Exception {
-        MealPlan mealPlan =null;
-        List<Meal> meals = new ArrayList<>();
+   @Test
+    void should_test_ResponseJSON() throws Exception{
 
-        when(mockHealthyFoodServiceImpl.getDailyMeals(mealPlan)).thenReturn(meals);
+        mockMvcController.perform( get(baseUrl)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", notNullValue()))
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0][0].servings",lessThanOrEqualTo(100)));
+    }
 
-        this.mockMvcController.perform(
-                        MockMvcRequestBuilders.get("/api/v1/mealPlanner/"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+   @ParameterizedTest
+   @MethodSource("parametersGenerator")
+   void should_test_AllResponseEndpoits(String url, ResultMatcher result) throws Exception {
+
+        mockMvcController.perform(
+                        get(url)).andExpect(result);
+    }
+
+    private static Stream<Arguments> parametersGenerator() {
+        return Stream.of(
+              Arguments.of(baseUrl,MockMvcResultMatchers.status().isOk()),
+              Arguments.of(baseUrl + "BadURL",MockMvcResultMatchers.status().isNotFound()),
+              Arguments.of(baseUrl + "/2000",MockMvcResultMatchers.status().isOk()),
+              Arguments.of(baseUrl + "/exclude=egg",MockMvcResultMatchers.status().isOk()),
+              Arguments.of(baseUrl + "/2000/exclude=egg",MockMvcResultMatchers.status().isOk()),
+              Arguments.of(baseUrl + String.format("/%s", Diet.KETOGENIC), MockMvcResultMatchers.status().isBadRequest()),
+              Arguments.of(baseUrl + String.format("/diet=%s",Diet.KETOGENIC), MockMvcResultMatchers.status().isOk()),
+              Arguments.of(baseUrl + String.format("/diet=%s/2000",Diet.KETOGENIC), MockMvcResultMatchers.status().isOk()),
+              Arguments.of(baseUrl + String.format("/diet=%s/exclude=egg",Diet.KETOGENIC), MockMvcResultMatchers.status().isOk()),
+              Arguments.of(baseUrl + String.format("/diet=%s/2000/exclude=egg",Diet.KETOGENIC), MockMvcResultMatchers.status().isOk())
+      );
     }
 
     }

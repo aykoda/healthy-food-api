@@ -1,5 +1,6 @@
 package com.techreturners.healthyfood.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.techreturners.healthyfood.model.Diet;
 import com.techreturners.healthyfood.model.Meal;
 import com.techreturners.healthyfood.model.MealPlan;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -16,37 +18,33 @@ import java.util.List;
 @RequestMapping("/api/v1/mealPlanner")
 public class HealthyFoodController {
 
+    private RestTemplate restTemplate;
     @Autowired
     HealthyFoodService healthyDailyMealService;
 
-    @GetMapping
-    public ResponseEntity getDailyMeals() {
-        List<Meal> meals = null;
-        meals = healthyDailyMealService.getDailyMeals();
-        return new ResponseEntity<>(meals, HttpStatus.OK);
-    }
 
     @GetMapping
-    @RequestMapping(value = {"/diet={diet}", "/{calories}", "/diet={diet}/{calories}"})
-    public ResponseEntity getDailyMealsSpecificDiet(@PathVariable(required = false) Diet diet, @PathVariable(required = false) Long calories) {
+    @RequestMapping(value = { "","/","/diet={diet}", "/{calories}","/exclude={ingredients}",
+            "/diet={diet}/{calories}", "/{calories}/exclude={ingredients}", "/diet={diet}/exclude={ingredients}",
+            "/diet={diet}/{calories}/exclude={ingredients}"
+    })
+    public ResponseEntity getDailyMeals( @PathVariable(required = false) Diet diet,@PathVariable(required = false) Long calories, @PathVariable(required = false) List<String> ingredients) throws JsonProcessingException {
+        List<Meal> meals = null;
         MealPlan inputMealPlan = new MealPlan();
+
         inputMealPlan.setDiet(diet);
         inputMealPlan.setTargetCalories(calories);
-        List<Meal> meals = null;
-        meals = healthyDailyMealService.getDailyMeals(inputMealPlan);
-
-        return new ResponseEntity<>(meals, HttpStatus.OK);
-    }
-
-    @GetMapping
-    @RequestMapping(value = {"/exclude={ingredients}", "/exclude={ingredients}/{calories}"})
-    public ResponseEntity getDailyMealsCaloriesExclusions(@PathVariable(required = false) List<String> ingredients, @PathVariable(required = false) Long calories) {
-        MealPlan inputMealPlan = new MealPlan();
         inputMealPlan.setExclusions(ingredients);
-        inputMealPlan.setTargetCalories(calories);
-        List<Meal> meals = null;
+
         meals = healthyDailyMealService.getDailyMeals(inputMealPlan);
+
+
+        //ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter().withRootValueSeparator("\n");
+        //String json = ow.writeValueAsString((Object) meals);
 
         return new ResponseEntity<>(meals, HttpStatus.OK);
     }
+
+
+
 }
