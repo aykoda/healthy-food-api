@@ -26,7 +26,7 @@ public class HealthyFoodController {
     @GetMapping
     @RequestMapping(value = { "","/","/diet={diet}", "/{calories}","/exclude={ingredients}",
             "/diet={diet}/{calories}", "/{calories}/exclude={ingredients}", "/diet={diet}/exclude={ingredients}",
-            "/diet={diet}/{calories}/exclude={ingredients}"
+            "/diet={diet}/{calories}/exclude={ingredients}","/exclude={ingredients}/{calories}"
     })
     public ResponseEntity getDailyMeals( @PathVariable(required = false) Diet diet,@PathVariable(required = false) Long calories, @PathVariable(required = false) List<String> ingredients) throws JsonProcessingException {
         List<Meal> meals = null;
