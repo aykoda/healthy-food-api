@@ -22,6 +22,7 @@ Dependencies used:
 - Spring Web - web endpoint for clients - (rather than Spring reactive web)
 - Validation - to simplify validation of parameters
 - Java Actuator - Actuator is mainly used to expose operational information about the running application — health, metrics, info, dump, env, etc
+  
   http://localhost:8080/actuator/health
 
   http://localhost:8080/actuator/info
