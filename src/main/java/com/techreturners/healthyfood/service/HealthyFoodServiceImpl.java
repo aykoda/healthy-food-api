@@ -5,7 +5,6 @@ import com.techreturners.healthyfood.model.Meal;
 import com.techreturners.healthyfood.model.MealPlan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,7 @@ public class HealthyFoodServiceImpl implements HealthyFoodService {
     @Override
     public List<Meal> getDailyMeals(MealPlan meal)  {
 
-        apiConfig = apiConfigService.getMealPlanParameterBuider(meal);
+        apiConfig = apiConfigService.getMealPlanParameterBuilder(meal);
 
         List<Meal> meals = new ArrayList<>(apiConfigService.getJsonResponse(apiConfig).values());
 

@@ -40,22 +40,8 @@ public class MealPlan {
         return exclusions;
     }
 
-    public void setExclusions(List exclusions) {
+    public void setExclusions(List<String> exclusions) {
         this.exclusions = exclusions;
     }
 
-
-//    @Id
-//    @GeneratedValue
-//    @Column(updatable = false, nullable = false)
-//    Long id;
-//
-//    @Column
-//    Meal breakfast;
-//
-//    @Column
-//    Meal lunch;
-//
-//    @Column
-//    Meal dinner;
 }
