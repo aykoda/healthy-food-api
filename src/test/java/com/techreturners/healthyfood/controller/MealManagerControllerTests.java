@@ -75,8 +75,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
               Arguments.of(baseUrl + String.format("/diet=%s",Diet.KETOGENIC), MockMvcResultMatchers.status().isOk()),
               Arguments.of(baseUrl + String.format("/diet=%s/2000",Diet.KETOGENIC), MockMvcResultMatchers.status().isOk()),
               Arguments.of(baseUrl + String.format("/diet=%s/exclude=egg",Diet.KETOGENIC), MockMvcResultMatchers.status().isOk()),
-              Arguments.of(baseUrl + String.format("/diet=%s/2000/exclude=egg",Diet.KETOGENIC), MockMvcResultMatchers.status().isOk())
-      );
+              Arguments.of(baseUrl + String.format("/diet=%s/2000/exclude=egg",Diet.KETOGENIC), MockMvcResultMatchers.status().isOk()));
     }
 
     }
